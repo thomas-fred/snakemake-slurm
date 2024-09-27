@@ -11,10 +11,10 @@ rule draw_country:
         import geopandas as gpd
         import matplotlib.pyplot as plt
 
-        world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
+        world = gpd.read_parquet("admin-level-0.geoparquet")
 
         f, ax = plt.subplots()
-        world[world.iso_a3 == f"{wildcards.iso_a3}"].plot(ax=ax)
+        world[world.GID_0 == f"{wildcards.iso_a3}"].plot(ax=ax)
         ax.set_title(f"{wildcards.iso_a3}")
         f.savefig(output.country)
 
