@@ -1,0 +1,16 @@
+# snakemake 'profile' for executing on the OUCE HPC cluster
+
+executor: slurm
+jobs: 64  # maximum task concurrency
+slurm-init-seconds-before-status-checks: 5
+latency-wait: 5
+
+# Default execution parameters
+# These may be overridden on a per-rule basis in a `resources` block
+# Note the translation table between SLURM and snakemake resource definition in the docs:
+# https://snakemake.github.io/snakemake-plugin-catalog/plugins/executor/slurm.html#advanced-resource-specifications
+default-resources:
+  - "slurm_partition=Short"
+  - "slurm_extra='--mail-type=FAIL,END --mail-user=cenv0899@ox.ac.uk'"
+  - "runtime=60"  # minutes
+  - "mem_mb=1024"
